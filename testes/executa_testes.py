@@ -1,6 +1,7 @@
 from pathlib import Path
 from leitura.busca_arquivos import busca
 from leitura.le_arquivos import le
+from llm.chama import resposta
 
 def mostra_resultados(numero_total_testes:int, numero_corretos:int) -> None:
     print('\n---------- Resultado dos Testes ----------\n')
@@ -36,6 +37,23 @@ def testa_le_arquivos() -> int:
     print('*** Falha na leitura de arquivos!')
     return 0
 
+def testa_llm() -> int:
+    '''
+    Função que testa se o retorno da LLM via Ollama.
+    '''
+    arquivos = le(busca((str(Path('.').absolute()) + r'\testes\arquivos')))
+
+    for i in arquivos:
+        for _, j in i.items():
+            ollama = resposta(j)
+
+    if ollama:
+        print('* Resposta da LLM funcionando de acordo!')
+        return 1
+
+    print('*** Falha na resposta da LLM!')
+    return 0
+
 def testa_tudo() -> None:
     '''
     Função que irá testar todos os arquivos Python presentes neste projeto.
@@ -48,6 +66,9 @@ def testa_tudo() -> None:
 
     num_testes += 1
     num_corretos += testa_le_arquivos()
+
+    num_testes += 1
+    num_corretos += testa_llm()
 
     mostra_resultados(num_testes, num_corretos)
 
