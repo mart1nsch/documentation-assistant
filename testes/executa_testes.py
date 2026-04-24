@@ -1,5 +1,6 @@
 from pathlib import Path
 from leitura.busca_arquivos import busca
+from leitura.le_arquivos import le
 
 def mostra_resultados(numero_total_testes:int, numero_corretos:int) -> None:
     print('\n---------- Resultado dos Testes ----------\n')
@@ -18,9 +19,22 @@ def testa_busca_arquivos() -> int:
     if len(arquivos) == 1:
         print('* Busca de arquivos funcionando de acordo!')
         return 1
-    else:
-        print('*** Falha na busca de arquivos!')
-        return 0
+    
+    print('*** Falha na busca de arquivos!')
+    return 0
+    
+def testa_le_arquivos() -> int:
+    '''
+    Função que irá testar as funções de leitura de arquivos.
+    '''
+    arquivos_processados = le(busca((str(Path('.').absolute()) + r'\testes\arquivos')))
+    
+    if len(arquivos_processados) == 1:
+        print('* Leitura de arquivos funcionando de acordo!')
+        return 1
+
+    print('*** Falha na leitura de arquivos!')
+    return 0
 
 def testa_tudo() -> None:
     '''
@@ -31,6 +45,9 @@ def testa_tudo() -> None:
 
     num_testes += 1
     num_corretos += testa_busca_arquivos()
+
+    num_testes += 1
+    num_corretos += testa_le_arquivos()
 
     mostra_resultados(num_testes, num_corretos)
 
