@@ -23,7 +23,7 @@ def testa_busca_arquivos() -> int:
     
     print('*** Falha na busca de arquivos!')
     return 0
-    
+
 def testa_le_arquivos() -> int:
     '''
     Função que irá testar as funções de leitura de arquivos.
