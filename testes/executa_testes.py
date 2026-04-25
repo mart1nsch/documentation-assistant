@@ -29,7 +29,7 @@ def testa_le_arquivos() -> int:
     Função que irá testar as funções de leitura de arquivos.
     '''
     arquivos_processados = le(busca((str(Path('.').absolute()) + r'\testes\arquivos')))
-    print(arquivos_processados)
+    
     if len(arquivos_processados) == 1:
         print('* Leitura de arquivos funcionando de acordo!')
         return 1
