@@ -10,7 +10,7 @@ def le(arquivos:list) -> list[dict]:
         try:
             p = Path(str(i))
             with p.open(encoding='utf-8') as f:
-                arquivos_processados.append({ p.name: f.read() })
+                arquivos_processados.append({ p.name: { 'path': str(p.parent), 'content': f.read(), 'resume': '' } })
         except Exception as e:
             print('Falha ao ler o arquivo. ', str(e))
 

@@ -29,7 +29,7 @@ def testa_le_arquivos() -> int:
     Função que irá testar as funções de leitura de arquivos.
     '''
     arquivos_processados = le(busca((str(Path('.').absolute()) + r'\testes\arquivos')))
-    
+    print(arquivos_processados)
     if len(arquivos_processados) == 1:
         print('* Leitura de arquivos funcionando de acordo!')
         return 1
@@ -39,13 +39,13 @@ def testa_le_arquivos() -> int:
 
 def testa_llm() -> int:
     '''
-    Função que testa se o retorno da LLM via Ollama.
+    Função que testa o retorno da LLM via Ollama.
     '''
     arquivos = le(busca((str(Path('.').absolute()) + r'\testes\arquivos')))
 
     for i in arquivos:
         for _, j in i.items():
-            ollama = resposta(j)
+            ollama = resposta(j['content'])
 
     if ollama:
         print('* Resposta da LLM funcionando de acordo!')
