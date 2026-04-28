@@ -99,4 +99,5 @@ def testa_tudo() -> None:
 
     mostra_resultados(num_testes, num_corretos)
 
-testa_tudo()
+if __name__ == '__main__':
+    testa_tudo()
