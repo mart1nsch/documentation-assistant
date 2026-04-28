@@ -1,4 +1,7 @@
 import argparse, sys
+from leitura.busca_arquivos import busca
+from leitura.le_arquivos import le
+from llm.chama import resposta
 
 def main():
     parser = argparse.ArgumentParser()
@@ -12,8 +15,13 @@ def main():
     if not args.diretorio_escrita:
         print('Diretório de escrita não informado.')
         sys.exit(1)
-    
-    
 
+    arquivos_processados = le(busca(args.diretorio_leitura))
+    
+    for i in arquivos_processados:
+        for key, value in i.items():
+            prompt = 'Nome Arquivo: ' + key + ', Conteúdo: ' + value['content']
+            resposta_llm = resposta(prompt)
+        
 if __name__ == '__main__':
     main()
