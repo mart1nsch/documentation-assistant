@@ -9,7 +9,7 @@ def resposta(texto_arquivo:str) -> str:
     response = chat(
         model='llama3.1:8b',
         messages=[
-            { 'role': 'system', 'content': 'Você é um assistente que cria documentações técnicas de arquivos de programação. Leia todo o arquivo que é enviado a você e retorne apenas a documentação técnica, nada mais.' },
+            { 'role': 'system', 'content': 'Você é um assistente que cria documentações técnicas de arquivos de programação. Leia todo o arquivo que é enviado a você e retorne apenas a documentação técnica, nada mais. Escrava em formato para arquivos .md.' },
             { 'role': 'user', 'content': prompt }
         ],
     )
