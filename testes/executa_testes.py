@@ -1,7 +1,9 @@
 from pathlib import Path
+import os
 from leitura.busca_arquivos import busca
 from leitura.le_arquivos import le
 from llm.chama import resposta
+from escrita.escreve_arquivos import escreve
 
 def mostra_resultados(numero_total_testes:int, numero_corretos:int) -> None:
     print('\n---------- Resultado dos Testes ----------\n')
@@ -54,6 +56,28 @@ def testa_llm() -> int:
     print('*** Falha na resposta da LLM!')
     return 0
 
+def testa_escrita() -> int:
+    '''
+    Função que testa a escrita de arquivos.
+    '''
+    p = Path('./testes/arquivos')
+
+    try:
+        os.remove('./testes/arquivos/teste.md')
+    except FileNotFoundError as e:
+        pass
+
+    escreve(str(p.absolute()), 'teste.md', 'Teste 123456')
+
+    arquivo_criado = Path('./testes/arquivos/teste.md')
+
+    if arquivo_criado.is_file():
+        print('* Escrita de arquivos funcionando de acordo!')
+        return 1
+
+    print('*** Falha na escrita de arquivos!')
+    return 0
+
 def testa_tudo() -> None:
     '''
     Função que irá testar todos os arquivos Python presentes neste projeto.
@@ -69,6 +93,9 @@ def testa_tudo() -> None:
 
     num_testes += 1
     num_corretos += testa_llm()
+
+    num_testes += 1
+    num_corretos += testa_escrita()
 
     mostra_resultados(num_testes, num_corretos)
 

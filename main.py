@@ -2,6 +2,7 @@ import argparse, sys
 from leitura.busca_arquivos import busca
 from leitura.le_arquivos import le
 from llm.chama import resposta
+from escrita.escreve_arquivos import escreve
 
 def main():
     parser = argparse.ArgumentParser()
@@ -22,6 +23,13 @@ def main():
         for key, value in i.items():
             prompt = 'Nome Arquivo: ' + key + ', Conteúdo: ' + value['content']
             resposta_llm = resposta(prompt)
+
+            if args.diretorio_escrita == 'None':
+                diretorio_escrita = i['path']
+            else:
+                diretorio_escrita = args.diretorio_escrita
+
+            escreve(diretorio_escrita, key, resposta_llm)
         
 if __name__ == '__main__':
     main()
