@@ -1,24 +1,23 @@
 
 ---------------------------------------------------------------------
 
-**Documentação Técnica do Arquivo chama.py**
-=====================================
+**chama.py**
+===============================
+### Arquivo responsável por criar documentações técnicas de arquivos de programação.
+### Chamada da função `resposta` para gerar a documentação técnica.
 
-### Função resposta(texto_arquivo: str) -> str
+### Funções
+*   `chama(system_prompt:str, user_prompt:str)`: Função que utiliza o modelo Llama 3.1 para gerar uma resposta baseada em um prompt do usuário.
+*   `resposta(texto_arquivo:str) -> str`: Função responsável por criar a documentação técnica de acordo com o conteúdo do arquivo recebido.
 
-#### Descrição
-A função `resposta` utiliza o Ollama localmente para gerar uma resposta de acordo com a entrada do usuário.
+### Dependências
+*   Ollama (biblioteca necessária para o funcionamento das funções)
+*   Subprocess (para reexecução da aplicação caso haja um erro de conexão)
 
-#### Parâmetros
-* `texto_arquivo`: A entrada do usuário que será utilizada para gerar a resposta. Deve ser um string.
-
-#### Retorno
-* Uma string contendo a resposta gerada pelo Ollama.
-
-#### Função Interna chat(model: str, messages: list)
-A função `chat` é chamada internamente e utiliza o modelo `llama3.1:8b`. Ela envia as seguintes mensagens:
-+ Um prompt de sistema que descreve a tarefa a ser realizada.
-+ O conteúdo do parâmetro `prompt`, que contém o texto do arquivo enviado para criar a documentação técnica.
-
-#### Formato de Saída
-A resposta gerada pelo Ollama é retornada em formato de string, representando a documentação técnica do arquivo original.
+### Exemplos de uso
+```python
+texto_arquivo = "Crie a documentação técnica do arquivo abaixo:\n Nome Arquivo: exemplo.py, Conteúdo: print('Olá Mundo')\n"
+documento_tecnica = resposta(texto_arquivo)
+print(documento_tecnica)
+```
+Esse exemplo usa o arquivo `exemplo.py` como entrada para a função `resposta`, gerando uma documentação técnica correspondente.
